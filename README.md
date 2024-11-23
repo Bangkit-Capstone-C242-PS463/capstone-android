@@ -1,1 +1,3 @@
-# capstone-android
+# Bangkit Capstone Android App
+
+## InSight - Internal Disease Detection App
