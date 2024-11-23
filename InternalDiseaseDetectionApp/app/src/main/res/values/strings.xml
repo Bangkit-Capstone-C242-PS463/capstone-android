@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">InSight</string>
+    <string name="signup">Register</string>
+    <string name="login">Login</string>
+    <string name="message_welcome_page">Here, by analyzing your symptoms, we can provide insights to detect your potential internal disease before they become a concern. \n\nTake charge of your health today! Whether you\'re just curious or actively seeking answers, we\’re here to guide you every step of the way. \n\nLet\’s start your health journey together! 🚀</string>
+    <string name="title_welcome_page">Welcome to InSight!</string>
+    <string name="title_signup_page">Please complete your personal details first!</string>
+    <string name="message_signup_page">Fill in the fields below!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Please enter your data first!</string>
+    <string name="title_login_page">Ready to unlock a super tool for your health?</string>
+    <string name="name">Name</string>
+    <string name="message_main_page">InSight</string>
+    <string name="greeting">Hello %1$s,</string>
+    <string name="logout">Logout</string>
+    <string name="add_inference">Add Inference</string>
+    <string name="upload">Upload</string>
+    <string name="welcome_image">Welcome Image</string>
+    <string name="password_warning">Password cannot be less than 8 characters</string>
+    <string name="email_warning">Email must be in a valid format</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+    <string name="retro_type">Retro</string>
+    <string name="retry">Retry</string>
+</resources>
