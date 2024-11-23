@@ -15,7 +15,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "BASE_URL", "\"https://bangkit-capstone-backend-700350424837.asia-southeast1.run.app/api/v1/\"")
+        buildConfigField("String", "BASE_URL", "\"https://capstone-backend-700350424837.asia-southeast1.run.app/api/v1/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
