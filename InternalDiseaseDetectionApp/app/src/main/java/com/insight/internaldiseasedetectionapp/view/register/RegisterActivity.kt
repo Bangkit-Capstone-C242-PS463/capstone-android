@@ -75,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     val registerResponse = apiService.registerUser(UserRegisterRequest(name, email, password))
-                    if (!registerResponse.error!!) {
+                    if (registerResponse.success == true) {
                         AlertDialog.Builder(this@RegisterActivity).apply {
                             setTitle("Congratulations!")
                             setMessage("You successfully created an account!")
@@ -89,7 +89,7 @@ class RegisterActivity : AppCompatActivity() {
                     } else {
                         AlertDialog.Builder(this@RegisterActivity).apply {
                             setTitle("Registration Failed")
-                            setMessage(registerResponse.message)
+                            setMessage("Try to register again!")
                             setPositiveButton("Retry", null)
                             setCancelable(false)
                             create()
@@ -98,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     AlertDialog.Builder(this@RegisterActivity).apply {
-                        setTitle("Registration Error")
+                        setTitle("Error")
                         setMessage("An error occurred: ${e.message}")
                         setPositiveButton("Retry", null)
                         setCancelable(false)
