@@ -7,12 +7,12 @@ import com.insight.internaldiseasedetectionapp.data.remote.user.UserRegisterResp
 import retrofit2.http.*
 
 interface ApiService {
-    @POST("signup")
+    @POST("auth/signup")
     suspend fun registerUser(
         @Body user: UserRegisterRequest
     ): UserRegisterResponse
 
-    @POST("login")
+    @POST("auth/login")
     suspend fun loginUser(
         @Body credentials: UserLoginRequest
     ): UserLoginResponse

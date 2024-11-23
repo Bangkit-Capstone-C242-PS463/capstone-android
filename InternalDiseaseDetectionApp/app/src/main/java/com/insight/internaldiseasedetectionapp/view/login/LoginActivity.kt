@@ -83,18 +83,17 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     val loginResponse = apiService.loginUser(UserLoginRequest(email, password))
-
-                    if (!loginResponse.error!!) {
-                        viewModel.saveSession(UserModel(email, loginResponse.loginResult?.token.toString()))
+                    if (loginResponse.access_token != null) {
+                        viewModel.saveSession(UserModel(email, loginResponse.access_token.toString()))
 
                         val sharedPreferences = getSharedPreferences("InSightPrefs", Context.MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
-                        editor.putString("USER_TOKEN", loginResponse.loginResult?.token.toString())
+                        editor.putString("USER_TOKEN", loginResponse.access_token.toString())
                         editor.apply()
 
                         AlertDialog.Builder(this@LoginActivity).apply {
                             setTitle("Login Success!")
-                            setMessage("Welcome back, ${loginResponse.loginResult?.name}!")
+                            setMessage("Welcome back, ${loginResponse.name}!")
                             setPositiveButton("Continue") { _, _ ->
                                 ViewModelFactory.clearInstance()
                                 val intent = Intent(context, MainActivity::class.java)
@@ -109,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         AlertDialog.Builder(this@LoginActivity).apply {
                             setTitle("Login Error")
-                            setMessage(loginResponse.message)
+                            setMessage("Try to login again!")
                             setPositiveButton("Retry", null)
                             setCancelable(false)
                             create()
