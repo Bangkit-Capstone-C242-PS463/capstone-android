@@ -5,6 +5,5 @@ import android.os.Parcelable
 
 @Parcelize
 data class UserRegisterResponse(
-	val error: Boolean? = null,
-	val message: String? = null
+	val success: Boolean? = null,
 ) : Parcelable
