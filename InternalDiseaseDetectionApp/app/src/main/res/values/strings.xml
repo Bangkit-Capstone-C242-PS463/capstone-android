@@ -25,4 +25,11 @@
     <string name="hybrid_type">Hybrid</string>
     <string name="retro_type">Retro</string>
     <string name="retry">Retry</string>
+    <string name="home_description">Here are your past diagnoses!</string>
+    <string name="home_welcome">Hi, ABC!</string>
+    <string name="login_image">Login Image</string>
+    <string name="no_diagnoses_title">No diagnoses yet!</string>
+    <string name="no_diagnoses_description">Click the + button below to get your first internal disease diagnosis!</string>
+    <string name="disease_name">Disease Name</string>
+    <string name="diagnosis_date">Diagnosis Date</string>
 </resources>

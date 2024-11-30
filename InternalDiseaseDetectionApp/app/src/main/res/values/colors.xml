@@ -5,6 +5,8 @@
     <color name="navy">#FF2D3D4F</color>
     <color name="blue">#6FD3FB</color>
     <color name="green">#5DDB5D</color>
+    <color name="blue_50">#D4FEF4</color>
     <color name="blue_100">#C7FEF1</color>
+    <color name="blue_200">#AEFDEB</color>
     <color name="blue_500">#64FCD9</color>
 </resources>
