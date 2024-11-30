@@ -51,6 +51,24 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
         }
     }
 
+    fun deleteUserHistory(context: Context, historyId: String) {
+        apiService = ApiConfig.getApiService(context)
+        viewModelScope.launch {
+            try {
+                delay(1000L)
+                val response = apiService.deleteUserHistory(historyId)
+                if (response.success == true) {
+                    // If delete succeed, fetch user history again
+                    fetchUserHistory(context)
+                } else {
+                    _error.value = "Failed to delete user history"
+                }
+            } catch (e: Exception) {
+                _error.value = e.message
+            }
+        }
+    }
+
     fun logout() {
         viewModelScope.launch {
             repository.logout()

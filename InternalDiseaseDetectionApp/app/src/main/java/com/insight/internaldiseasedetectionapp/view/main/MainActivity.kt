@@ -65,7 +65,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Diagnoses History Recycler View
-            val diagnosesAdapter = DiagnosisAdapter(diagnoses) {}
+            val diagnosesAdapter = DiagnosisAdapter(diagnoses) { historyId ->
+                viewModel.deleteUserHistory(this, historyId)
+            }
             recyclerView.adapter = diagnosesAdapter
         }
 
