@@ -4,13 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.insight.internaldiseasedetectionapp.adapter.DiagnosisAdapter
-import com.insight.internaldiseasedetectionapp.data.remote.diagnosis.ListDiagnosesItem
 import com.insight.internaldiseasedetectionapp.databinding.ActivityMainBinding
 import com.insight.internaldiseasedetectionapp.view.ViewModelFactory
 import com.insight.internaldiseasedetectionapp.view.symptoms.SymptomsActivity
@@ -40,47 +41,44 @@ class MainActivity : AppCompatActivity() {
         noDiagnosesTitle = binding.noDiagnosesTitle
         noDiagnosesDesc = binding.noDiagnosesDesc
 
-//        viewModel.getSession().observe(this) { user ->
-//            if (!user.isLogin) {
-//                startActivity(Intent(this, WelcomeActivity::class.java))
-//                finish()
-//            } else {
-//                // To be implemented
-//            }
-//        }
-
-        // Dummy Functions
-        fun createDummyDiagnoses(): List<ListDiagnosesItem> {
-            return listOf(
-                ListDiagnosesItem("Common Cold", "Thursday, 28 November 2024"),
-                ListDiagnosesItem("Flu", "Monday, 25 November 2024"),
-                ListDiagnosesItem("Chickenpox", "Friday, 15 November 2024"),
-                ListDiagnosesItem("Measles", "Sunday, 10 November 2024")
-            )
-        }
-        fun createEmptyDiagnoses(): List<ListDiagnosesItem> {
-            return listOf()
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                startActivity(Intent(this, WelcomeActivity::class.java))
+                finish()
+            } else {
+                viewModel.fetchUserHistory(this)
+            }
         }
 
-        // TODO: Fetch from API
-        val diagnoses: List<ListDiagnosesItem> = createDummyDiagnoses()
+        viewModel.diagnoses.observe(this) { diagnoses ->
+            // Handle Home Display Condition (Diagnoses / No Diagnoses Available)
+            if (diagnoses.isNotEmpty()) {
+                recyclerView.visibility = View.VISIBLE
+                imageHome.visibility = View.GONE
+                noDiagnosesTitle.visibility = View.GONE
+                noDiagnosesDesc.visibility = View.GONE
+            } else {
+                recyclerView.visibility = View.GONE
+                imageHome.visibility = View.VISIBLE
+                noDiagnosesTitle.visibility = View.VISIBLE
+                noDiagnosesDesc.visibility = View.VISIBLE
+            }
 
-        // Handle Home Display Condition (Diagnoses / No Diagnoses Available)
-        if (diagnoses.isNotEmpty()) {
-            recyclerView.visibility = View.VISIBLE
-            imageHome.visibility = View.GONE
-            noDiagnosesTitle.visibility = View.GONE
-            noDiagnosesDesc.visibility = View.GONE
-        } else {
-            recyclerView.visibility = View.GONE
-            imageHome.visibility = View.VISIBLE
-            noDiagnosesTitle.visibility = View.VISIBLE
-            noDiagnosesDesc.visibility = View.VISIBLE
+            // Diagnoses History Recycler View
+            val diagnosesAdapter = DiagnosisAdapter(diagnoses) {}
+            recyclerView.adapter = diagnosesAdapter
         }
 
-        // Diagnoses History Recycler View
-        val diagnosesAdapter = DiagnosisAdapter(diagnoses) {}
-        recyclerView.adapter = diagnosesAdapter
+        val loadingIndicator: ProgressBar = binding.loadingIndicator
+
+        // Setup Progress Bar
+        viewModel.loading.observe(this) { isLoading ->
+            loadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.error.observe(this) { err ->
+            Toast.makeText(this, err, Toast.LENGTH_SHORT).show()
+        }
 
         setupAction()
     }

@@ -1,19 +1,29 @@
 package com.insight.internaldiseasedetectionapp.data.remote.diagnosis
 
+import kotlinx.parcelize.Parcelize
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+@Parcelize
 data class DiagnosesResponse(
+	@SerializedName("history")
+	val history: List<ListDiagnosesItem?>? = null
+) : Parcelable
 
-	@field:SerializedName("listEvents")
-	val listDiagnoses: List<ListDiagnosesItem?>? = null,
-)
-
+@Parcelize
 data class ListDiagnosesItem(
+	@SerializedName("id")
+	val id: String? = null,
 
-	@field:SerializedName("disease")
-	val disease: String? = null,
+	@SerializedName("user_id")
+	val userId: String? = null,
 
-	@field:SerializedName("date")
-	val date: String? = null,
-)
+	@SerializedName("result")
+	val result: String? = null,
 
+	@SerializedName("created_at")
+	val createdAt: String? = null,
+
+	@SerializedName("updated_at")
+	val updatedAt: String? = null
+) : Parcelable
