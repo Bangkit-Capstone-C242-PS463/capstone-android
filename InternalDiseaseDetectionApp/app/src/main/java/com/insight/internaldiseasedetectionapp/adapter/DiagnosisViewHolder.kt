@@ -11,8 +11,8 @@ class DiagnosisViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val diagnosesDate: TextView = itemView.findViewById(R.id.diagnosis_date)
 
     fun bind(diagnosis: ListDiagnosesItem) {
-        diseaseName.text = diagnosis.disease
-        diagnosesDate.text = diagnosis.date
+        diseaseName.text = diagnosis.result
+        diagnosesDate.text = diagnosis.createdAt
     }
 
 }
