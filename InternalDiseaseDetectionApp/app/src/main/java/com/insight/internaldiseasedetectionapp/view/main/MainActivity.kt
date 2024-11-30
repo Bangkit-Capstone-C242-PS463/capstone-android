@@ -9,7 +9,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.insight.internaldiseasedetectionapp.data.remote.diagnosis.Diagnosis
+import com.insight.internaldiseasedetectionapp.adapter.DiagnosisAdapter
+import com.insight.internaldiseasedetectionapp.data.remote.diagnosis.ListDiagnosesItem
 import com.insight.internaldiseasedetectionapp.databinding.ActivityMainBinding
 import com.insight.internaldiseasedetectionapp.view.ViewModelFactory
 import com.insight.internaldiseasedetectionapp.view.welcome.WelcomeActivity
@@ -48,20 +49,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Dummy Functions
-        fun createDummyDiagnoses(): List<Diagnosis> {
+        fun createDummyDiagnoses(): List<ListDiagnosesItem> {
             return listOf(
-                Diagnosis("Common Cold", "2024-11-28"),
-                Diagnosis("Flu", "2024-11-25"),
-                Diagnosis("Chickenpox", "2024-11-15"),
-                Diagnosis("Measles", "2024-11-10")
+                ListDiagnosesItem("Common Cold", "Thursday, 28 November 2024"),
+                ListDiagnosesItem("Flu", "Monday, 25 November 2024"),
+                ListDiagnosesItem("Chickenpox", "Friday, 15 November 2024"),
+                ListDiagnosesItem("Measles", "Sunday, 10 November 2024")
             )
         }
-        fun createEmptyDiagnoses(): List<Diagnosis> {
+        fun createEmptyDiagnoses(): List<ListDiagnosesItem> {
             return listOf()
         }
 
         // TODO: Fetch from API
-        val diagnoses: List<Diagnosis> = createEmptyDiagnoses()
+        val diagnoses: List<ListDiagnosesItem> = createDummyDiagnoses()
 
         // Handle Home Display Condition (Diagnoses / No Diagnoses Available)
         if (diagnoses.isNotEmpty()) {
@@ -75,6 +76,10 @@ class MainActivity : AppCompatActivity() {
             noDiagnosesTitle.visibility = View.VISIBLE
             noDiagnosesDesc.visibility = View.VISIBLE
         }
+
+        // Diagnoses History Recycler View
+        val diagnosesAdapter = DiagnosisAdapter(diagnoses) {}
+        recyclerView.adapter = diagnosesAdapter
 
         setupAction()
     }
