@@ -6,31 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".view.main.MainActivity">
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/message_main_page"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintHorizontal_bias="1.0"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/blue_200"
+        android:padding="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="@string/logout"
-        android:src="@drawable/baseline_logout_24"
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/message_main_page"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/logout"
+            android:src="@drawable/baseline_logout_24"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/nameTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/home_welcome"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/nameTextView" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navbar" />
+
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/home_description"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/titleTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main"
@@ -38,20 +80,68 @@
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="60dp"
-        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintTop_toBottomOf="@id/messageTextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/logoutButton"
-        app:layout_constraintStart_toStartOf="@+id/nameTextView" />
+        app:layout_constraintEnd_toEndOf="@id/navbar"
+        app:layout_constraintStart_toStartOf="@id/navbar" />
+
+    <ImageView
+        android:id="@+id/imageHome"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="85dp"
+        android:contentDescription="@string/login_image"
+        app:layout_constraintTop_toBottomOf="@id/messageTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/image_home" />
+
+    <TextView
+        android:id="@+id/noDiagnosesTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="0dp"
+        android:text="@string/no_diagnoses_title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageHome" />
+
+    <TextView
+        android:id="@+id/noDiagnosesDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:text="@string/no_diagnoses_description"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/noDiagnosesTitle"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/noDiagnosesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/noDiagnosesTitle" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/add_inference"
-        android:layout_marginBottom="75dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/logoutButton"
+        app:layout_constraintEnd_toEndOf="@id/navbar"
         app:srcCompat="@drawable/baseline_add_24"
         android:backgroundTint="@drawable/btn_color" />
 
