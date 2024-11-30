@@ -13,6 +13,7 @@ import com.insight.internaldiseasedetectionapp.adapter.DiagnosisAdapter
 import com.insight.internaldiseasedetectionapp.data.remote.diagnosis.ListDiagnosesItem
 import com.insight.internaldiseasedetectionapp.databinding.ActivityMainBinding
 import com.insight.internaldiseasedetectionapp.view.ViewModelFactory
+import com.insight.internaldiseasedetectionapp.view.symptoms.SymptomsActivity
 import com.insight.internaldiseasedetectionapp.view.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
@@ -39,14 +40,14 @@ class MainActivity : AppCompatActivity() {
         noDiagnosesTitle = binding.noDiagnosesTitle
         noDiagnosesDesc = binding.noDiagnosesDesc
 
-        viewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                startActivity(Intent(this, WelcomeActivity::class.java))
-                finish()
-            } else {
-                // To be implemented
-            }
-        }
+//        viewModel.getSession().observe(this) { user ->
+//            if (!user.isLogin) {
+//                startActivity(Intent(this, WelcomeActivity::class.java))
+//                finish()
+//            } else {
+//                // To be implemented
+//            }
+//        }
 
         // Dummy Functions
         fun createDummyDiagnoses(): List<ListDiagnosesItem> {
@@ -84,10 +85,15 @@ class MainActivity : AppCompatActivity() {
         setupAction()
     }
 
-    // TODO: Setup FAB button
     private fun setupAction() {
         binding.logoutButton.setOnClickListener {
             viewModel.logout()
+        }
+
+        binding.fabAdd.setOnClickListener {
+            val intent = Intent(this, SymptomsActivity::class.java)
+            startActivity(intent)
+
         }
     }
 }

@@ -36,6 +36,9 @@
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.symptoms.SymptomsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
