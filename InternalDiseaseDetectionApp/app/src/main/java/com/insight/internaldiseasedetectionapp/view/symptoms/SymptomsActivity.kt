@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +34,21 @@ class SymptomsActivity : AppCompatActivity() {
         if (!name.isNullOrEmpty()) {
             binding.symptomsTextView.text = "Hi, $name"
         }
+
+        binding.symptomsPredictBtn.isEnabled = false
+
+        // Setup Edit Text Validation & Predict Button
+        val textWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                binding.symptomsPredictBtn.isEnabled = s.isNotEmpty()
+            }
+        }
+
+        binding.symptomsEditText.addTextChangedListener(textWatcher)
 
         setupAction()
     }
