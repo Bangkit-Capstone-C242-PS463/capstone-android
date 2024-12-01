@@ -36,4 +36,5 @@
     <string name="symptoms_example">For example: I\'ve been feeling feverish for the past two days with a persistent headache and a sore throat.</string>
     <string name="symptoms_input_guide">Describe your symptoms here…</string>
     <string name="predict">Predict</string>
+    <string name="result_placeholder">DISEASE X</string>
 </resources>
