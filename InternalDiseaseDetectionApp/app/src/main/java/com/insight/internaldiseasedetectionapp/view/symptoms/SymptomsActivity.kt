@@ -1,5 +1,7 @@
 package com.insight.internaldiseasedetectionapp.view.symptoms
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,10 +12,18 @@ import com.insight.internaldiseasedetectionapp.view.main.MainActivity
 class SymptomsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySymptomsBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySymptomsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Setup name
+        val sharedPreferences = this.getSharedPreferences("InSightPrefs", Context.MODE_PRIVATE)
+        val name = sharedPreferences.getString("USER_NAME", null)
+        if (!name.isNullOrEmpty()) {
+            binding.symptomsTextView.text = "Hi, $name"
+        }
 
         setupAction()
     }

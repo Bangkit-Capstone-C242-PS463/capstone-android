@@ -1,5 +1,7 @@
 package com.insight.internaldiseasedetectionapp.view.main
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -27,10 +29,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var noDiagnosesTitle: TextView
     private lateinit var noDiagnosesDesc: TextView
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Setup name
+        val sharedPreferences = this.getSharedPreferences("InSightPrefs", Context.MODE_PRIVATE)
+        val name = sharedPreferences.getString("USER_NAME", null)
+        if (!name.isNullOrEmpty()) {
+            binding.titleTextView.text = "Hi, $name"
+        }
 
         // Setup Recycler View for Disease History
         recyclerView = binding.recyclerViewMain
@@ -93,7 +103,6 @@ class MainActivity : AppCompatActivity() {
         binding.fabAdd.setOnClickListener {
             val intent = Intent(this, SymptomsActivity::class.java)
             startActivity(intent)
-
         }
     }
 }
