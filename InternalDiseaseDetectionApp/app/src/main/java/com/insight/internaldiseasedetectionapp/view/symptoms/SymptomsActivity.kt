@@ -63,7 +63,8 @@ class SymptomsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.symptomsPredictBtn.setDebouncedOnClickListener {
+        binding.symptomsPredictBtn.setOnClickListener {
+            binding.symptomsPredictBtn.isEnabled = false
             val userStory = binding.symptomsEditText.text.toString()
 
             lifecycleScope.launch {
@@ -84,6 +85,7 @@ class SymptomsActivity : AppCompatActivity() {
                             setCancelable(false)
                             create()
                             show()
+                            binding.symptomsPredictBtn.isEnabled = true
                         }
                     } else {
                         AlertDialog.Builder(this@SymptomsActivity).apply {
@@ -93,6 +95,7 @@ class SymptomsActivity : AppCompatActivity() {
                             setCancelable(false)
                             create()
                             show()
+                            binding.symptomsPredictBtn.isEnabled = true
                         }
                     }
                 } catch (e: Exception) {
@@ -103,25 +106,10 @@ class SymptomsActivity : AppCompatActivity() {
                         setCancelable(false)
                         create()
                         show()
+                        binding.symptomsPredictBtn.isEnabled = true
                     }
                 }
             }
         }
-    }
-
-    private fun View.setDebouncedOnClickListener(debounceTime: Long = 5000L, action: (View) -> Unit) {
-        this.setOnClickListener(object : View.OnClickListener {
-            private var lastClickTime: Long = 0
-
-            override fun onClick(v: View) {
-                val currentTime = System.currentTimeMillis()
-                if (currentTime - lastClickTime >= debounceTime) {
-                    lastClickTime = currentTime
-                    v.isEnabled = false
-                    action(v)
-                    v.postDelayed({ v.isEnabled = true }, debounceTime)
-                }
-            }
-        })
     }
 }
