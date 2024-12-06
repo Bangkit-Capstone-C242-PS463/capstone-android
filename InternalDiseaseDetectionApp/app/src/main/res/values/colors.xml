@@ -9,4 +9,6 @@
     <color name="blue_100">#C7FEF1</color>
     <color name="blue_200">#AEFDEB</color>
     <color name="blue_500">#64FCD9</color>
+    <color name="blue_600">#54D4B6</color>
+    <color name="blue_700">#44AB94</color>
 </resources>
