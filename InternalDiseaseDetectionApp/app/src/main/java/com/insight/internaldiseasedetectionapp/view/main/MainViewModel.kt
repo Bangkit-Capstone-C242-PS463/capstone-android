@@ -41,7 +41,7 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
                     val diagnoses = response.history.filterNotNull()
                     _diagnoses.value = diagnoses
                 } else {
-                    _error.value = "Failed to load diagnoses history"
+                    _error.value = "No diagnoses history"
                 }
             } catch (e: Exception) {
                 _error.value = e.message

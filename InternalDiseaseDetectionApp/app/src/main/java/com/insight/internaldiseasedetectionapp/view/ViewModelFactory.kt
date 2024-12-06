@@ -7,7 +7,6 @@ import com.insight.internaldiseasedetectionapp.data.UserRepository
 import com.insight.internaldiseasedetectionapp.di.Injection
 import com.insight.internaldiseasedetectionapp.view.login.LoginViewModel
 import com.insight.internaldiseasedetectionapp.view.main.MainViewModel
-import com.insight.internaldiseasedetectionapp.view.symptoms.SymptomsViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -18,9 +17,6 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
-            }
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                SymptomsViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

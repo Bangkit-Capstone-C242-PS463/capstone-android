@@ -9,7 +9,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -18,15 +17,10 @@ import com.insight.internaldiseasedetectionapp.data.remote.inference.InferenceRe
 import com.insight.internaldiseasedetectionapp.data.retrofit.ApiConfig
 import com.insight.internaldiseasedetectionapp.data.retrofit.ApiService
 import com.insight.internaldiseasedetectionapp.databinding.ActivitySymptomsBinding
-import com.insight.internaldiseasedetectionapp.view.ViewModelFactory
 import com.insight.internaldiseasedetectionapp.view.main.MainActivity
-import com.insight.internaldiseasedetectionapp.view.main.MainViewModel
 import kotlinx.coroutines.launch
 
 class SymptomsActivity : AppCompatActivity() {
-    private val viewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
     private lateinit var binding: ActivitySymptomsBinding
     private lateinit var apiService: ApiService
 
