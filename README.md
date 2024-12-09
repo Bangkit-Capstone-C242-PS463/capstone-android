@@ -29,3 +29,5 @@ InSight is an app to help people detect a potential internal disease through sym
 
 ## Credits
 This project is implemented by Team C242-PS463.
+
+App Icon: https://www.pinterest.com/pin/324048135698887380/
