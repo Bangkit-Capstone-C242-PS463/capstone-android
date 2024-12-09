@@ -16,7 +16,7 @@ class DiagnosisViewHolder(itemView: View, private val onDeleteClick: (String) ->
     private val trashButton: ImageButton = itemView.findViewById(R.id.trashButton)
 
     fun bind(diagnosis: ListDiagnosesItem) {
-        diseaseName.text = diagnosis.result
+        diseaseName.text = diagnosis.result?.split(" ")?.joinToString(" ") { it.capitalize(Locale.getDefault()) }
 
         // Parse createdAt
         val zonedDateTime = ZonedDateTime.parse(diagnosis.createdAt, DateTimeFormatter.ISO_ZONED_DATE_TIME)
