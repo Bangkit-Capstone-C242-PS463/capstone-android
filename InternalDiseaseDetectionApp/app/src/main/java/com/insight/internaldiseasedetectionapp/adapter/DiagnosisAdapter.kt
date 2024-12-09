@@ -9,7 +9,7 @@ import com.insight.internaldiseasedetectionapp.data.remote.diagnosis.ListDiagnos
 class DiagnosisAdapter(private val diagnoses: List<ListDiagnosesItem>, private val onItemClick: (String) -> Unit) : RecyclerView.Adapter<DiagnosisViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiagnosisViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_diagnosis, parent, false)
-        return DiagnosisViewHolder(view)
+        return DiagnosisViewHolder(view, onItemClick)
     }
 
     override fun onBindViewHolder(holder: DiagnosisViewHolder, position: Int) {

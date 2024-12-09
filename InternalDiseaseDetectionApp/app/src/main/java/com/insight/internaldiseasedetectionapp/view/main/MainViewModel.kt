@@ -13,6 +13,8 @@ import com.insight.internaldiseasedetectionapp.data.retrofit.ApiConfig
 import com.insight.internaldiseasedetectionapp.data.retrofit.ApiService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class MainViewModel(private val repository: UserRepository) : ViewModel() {
     private val _diagnoses = MutableLiveData<List<ListDiagnosesItem>>()
@@ -40,13 +42,40 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
                 if (response.history?.isNotEmpty() == true) {
                     val diagnoses = response.history.filterNotNull()
                     _diagnoses.value = diagnoses
+                    sortDiagnosesByDate()
                 } else {
-                    _error.value = "Failed to load diagnoses history"
+                    _error.value = "No diagnoses history"
                 }
             } catch (e: Exception) {
                 _error.value = e.message
             } finally {
                 _loading.value = false
+            }
+        }
+    }
+
+    private fun sortDiagnosesByDate() {
+        _diagnoses.value?.let {
+            _diagnoses.postValue(it.sortedByDescending {
+                item -> ZonedDateTime.parse(item.createdAt, DateTimeFormatter.ISO_ZONED_DATE_TIME)
+            })
+        }
+    }
+
+    fun deleteUserHistory(context: Context, historyId: String) {
+        apiService = ApiConfig.getApiService(context)
+        viewModelScope.launch {
+            try {
+                delay(1000L)
+                val response = apiService.deleteUserHistory(historyId)
+                if (response.success == true) {
+                    // If delete succeed, fetch user history again
+                    fetchUserHistory(context)
+                } else {
+                    _error.value = "Failed to delete user history"
+                }
+            } catch (e: Exception) {
+                _error.value = e.message
             }
         }
     }
