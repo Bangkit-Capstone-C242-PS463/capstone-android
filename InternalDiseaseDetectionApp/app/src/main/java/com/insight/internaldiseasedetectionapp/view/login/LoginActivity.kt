@@ -89,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
                         val sharedPreferences = getSharedPreferences("InSightPrefs", Context.MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
                         editor.putString("USER_TOKEN", loginResponse.access_token.toString())
+                        editor.putString("USER_NAME", loginResponse.name.toString())
                         editor.apply()
 
                         AlertDialog.Builder(this@LoginActivity).apply {
